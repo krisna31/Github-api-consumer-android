@@ -6,7 +6,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.krisna31.github_api_consumer.data.response.SearchUser
 import com.example.krisna31.github_api_consumer.data.response.SearchUserItem
 import com.example.krisna31.github_api_consumer.data.retrofit.ApiConfig
@@ -64,12 +63,10 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun setUserData(user: SearchUserItem) {
-        binding.tvTitle.text = restaurant.name
-        binding.tvDescription.text = restaurant.description
-        Glide.with(this@MainActivity)
-            .load()
-            .into(binding.ivPicture)
+    private fun setUserData(searchUserItems: List<SearchUserItem>) {
+        val adapter = UserAdapter()
+        adapter.submitList(searchUserItems)
+        binding.rvUser.adapter = adapter
     }
 
 
