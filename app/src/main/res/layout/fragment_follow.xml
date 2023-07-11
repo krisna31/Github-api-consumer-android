@@ -5,18 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.FollowFragment">
 
-    <TextView
-        android:id="@+id/testUsername"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_follow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
-
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/rv_follow"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:padding="16dp"-->
-    <!--        tools:listitem="@layout/item_user" />-->
+        android:padding="16dp"
+        tools:listitem="@layout/item_user" />
 
     <ProgressBar
         android:id="@+id/progressBar"

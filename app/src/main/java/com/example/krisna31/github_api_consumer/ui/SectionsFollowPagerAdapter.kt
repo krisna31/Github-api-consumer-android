@@ -10,7 +10,7 @@ class SectionsFollowPagerAdapter(activity: AppCompatActivity) : FragmentStateAda
         return 2
     }
 
-    val username: String = ""
+    private var username: String = ""
     override fun createFragment(position: Int): Fragment {
         val fragment = FollowFragment()
         fragment.arguments = Bundle().apply {
@@ -18,5 +18,10 @@ class SectionsFollowPagerAdapter(activity: AppCompatActivity) : FragmentStateAda
             putString(FollowFragment.ARG_USERNAME, username)
         }
         return fragment
+    }
+
+    fun setUsername(username: String): Unit {
+        this.username = username
+        notifyDataSetChanged()
     }
 }

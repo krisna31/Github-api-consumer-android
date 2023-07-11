@@ -48,16 +48,18 @@ class DetailUserActivity : AppCompatActivity() {
             detailViewModel.isLoading.observe(this) { isLoading ->
                 showLoading(isLoading)
             }
-        }
 
-        val sectionsPagerAdapter = SectionsFollowPagerAdapter(this)
-        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = findViewById(R.id.tabs)
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
-        supportActionBar?.elevation = 0f
+            val sectionsPagerAdapter = SectionsFollowPagerAdapter(this)
+            sectionsPagerAdapter.setUsername(username)
+            val viewPager: ViewPager2 = findViewById(R.id.view_pager)
+            viewPager.adapter = sectionsPagerAdapter
+            val tabs: TabLayout = findViewById(R.id.tabs)
+            TabLayoutMediator(tabs, viewPager) { tab, position ->
+                tab.text = resources.getString(TAB_TITLES[position])
+                viewPager.adapter = sectionsPagerAdapter
+            }.attach()
+            supportActionBar?.elevation = 0f
+        }
     }
 
     private fun setUserData(detailUser: DetailUserResponse) {
