@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+.env
+app/src/main/java/com/example/krisna31/github_api_consumer/data/retrofit/env.kt
