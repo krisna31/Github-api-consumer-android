@@ -2,11 +2,16 @@ package com.example.krisna31.github_api_consumer.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.example.krisna31.github_api_consumer.R
 import com.example.krisna31.github_api_consumer.data.response.DetailUserResponse
 import com.example.krisna31.github_api_consumer.databinding.ActivityDetailUserBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserActivity : AppCompatActivity() {
 
@@ -14,6 +19,12 @@ class DetailUserActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_USERNAME = "EXTRA_USERNAME"
+
+        @StringRes
+        private val TAB_TITLES = intArrayOf(
+            R.string.tab_text_1,
+            R.string.tab_text_2
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +49,15 @@ class DetailUserActivity : AppCompatActivity() {
                 showLoading(isLoading)
             }
         }
+
+        val sectionsPagerAdapter = SectionsFollowPagerAdapter(this)
+        val viewPager: ViewPager2 = findViewById(R.id.view_pager)
+        viewPager.adapter = sectionsPagerAdapter
+        val tabs: TabLayout = findViewById(R.id.tabs)
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
+        supportActionBar?.elevation = 0f
     }
 
     private fun setUserData(detailUser: DetailUserResponse) {
