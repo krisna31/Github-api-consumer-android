@@ -64,6 +64,9 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.listSearchUser.observe(this) { searchUserItems ->
             setUserData(searchUserItems)
         }
+        mainViewModel.isLoading.observe(this) { isLoading ->
+            showLoading(isLoading)
+        }
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvUser.layoutManager = layoutManager

@@ -1,6 +1,7 @@
 package com.example.krisna31.github_api_consumer.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -27,6 +28,11 @@ class UserAdapter : ListAdapter<SearchUserItem, UserAdapter.MyViewHolder>(DIFF_C
                 .load(userItem.avatarUrl)
                 .into(binding.civUser)
             binding.tvUsername.text = userItem.login
+            binding.root.setOnClickListener {
+                val intent = Intent(itemView.context, DetailUserActivity::class.java)
+                intent.putExtra(DetailUserActivity.EXTRA_USERNAME, userItem.login)
+                itemView.context.startActivity(intent)
+            }
         }
     }
 
