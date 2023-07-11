@@ -23,9 +23,9 @@ class MainViewModel : ViewModel() {
         findUser()
     }
 
-    private fun findUser() {
+    fun findUser(username: String = "krisna31") {
         _isLoading.value = true
-        val client = ApiConfig.getApiService().getUser("krisna31")
+        val client = ApiConfig.getApiService().getUser(username)
         client.enqueue(object : Callback<SearchUser> {
             override fun onResponse(
                 call: Call<SearchUser>,

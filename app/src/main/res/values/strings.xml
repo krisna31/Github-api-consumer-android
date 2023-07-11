@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Mini Github</string>
+    <string name="searchbar_hint">Masukkan nama user github</string>
 </resources>
