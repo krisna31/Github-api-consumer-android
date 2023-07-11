@@ -1,18 +1,13 @@
 package com.example.krisna31.github_api_consumer.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.krisna31.github_api_consumer.data.response.SearchUser
 import com.example.krisna31.github_api_consumer.data.response.SearchUserItem
-import com.example.krisna31.github_api_consumer.data.retrofit.ApiConfig
 import com.example.krisna31.github_api_consumer.databinding.ActivityMainBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,38 +24,19 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        val mainViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[MainViewModel::class.java]
+
+        mainViewModel.listSearchUser.observe(this) { searchUserItems ->
+            setUserData(searchUserItems)
+        }
+
         val layoutManager = LinearLayoutManager(this)
         binding.rvUser.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvUser.addItemDecoration(itemDecoration)
-
-        findUser()
-    }
-
-    private fun findUser() {
-        showLoading(true)
-        val client = ApiConfig.getApiService().getUser("krisna31")
-        client.enqueue(object : Callback<SearchUser> {
-            override fun onResponse(
-                call: Call<SearchUser>,
-                response: Response<SearchUser>
-            ) {
-                showLoading(false)
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    if (responseBody != null) {
-                        setUserData(responseBody.users)
-                    }
-                } else {
-                    Log.e(TAG, "onFailure: ${response.message()}")
-                }
-            }
-
-            override fun onFailure(call: Call<SearchUser>, t: Throwable) {
-                showLoading(false)
-                Log.e(TAG, "onFailure: ${t.message}")
-            }
-        })
     }
 
     private fun setUserData(searchUserItems: List<SearchUserItem>) {
@@ -71,10 +47,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
