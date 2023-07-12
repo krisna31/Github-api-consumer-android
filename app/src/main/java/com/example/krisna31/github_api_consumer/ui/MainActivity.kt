@@ -1,5 +1,6 @@
 package com.example.krisna31.github_api_consumer.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,14 +10,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.krisna31.github_api_consumer.data.response.SearchUserItem
 import com.example.krisna31.github_api_consumer.databinding.ActivityMainBinding
+import com.example.krisna31.github_api_consumer.ui.favorite.FavoriteUserActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
-    companion object {
-        private const val TAG = "MainActivity"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +52,6 @@ class MainActivity : AppCompatActivity() {
                 }
         }
 
-        supportActionBar?.hide()
-
         val mainViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
@@ -72,6 +68,10 @@ class MainActivity : AppCompatActivity() {
         binding.rvUser.layoutManager = layoutManager
         val itemDecoration = DividerItemDecoration(this, layoutManager.orientation)
         binding.rvUser.addItemDecoration(itemDecoration)
+
+        binding.civFavorite.setOnClickListener {
+            startActivity(Intent(this, FavoriteUserActivity::class.java))
+        }
     }
 
     private fun setUserData(searchUserItems: List<SearchUserItem>) {
