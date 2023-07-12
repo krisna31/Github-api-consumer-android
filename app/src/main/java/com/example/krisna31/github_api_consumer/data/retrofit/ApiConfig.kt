@@ -1,5 +1,6 @@
 package com.example.krisna31.github_api_consumer.data.retrofit
 
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -9,17 +10,17 @@ class ApiConfig {
     companion object {
         private const val BASE_URL = "https://api.github.com/"
         fun getApiService(): ApiService {
-//            val authInterceptor = Interceptor { chain ->
-//                val req = chain.request()
-//                val requestHeaders = req.newBuilder()
-//                    .addHeader("Authorization", "token " + env.API_TOKEN)
-//                    .build()
-//                chain.proceed(requestHeaders)
-//            }
+            val authInterceptor = Interceptor { chain ->
+                val req = chain.request()
+                val requestHeaders = req.newBuilder()
+                    .addHeader("Authorization", "token " + Env.API_TOKEN)
+                    .build()
+                chain.proceed(requestHeaders)
+            }
             val loggingInterceptor =
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val client = OkHttpClient.Builder()
-//                .addInterceptor(authInterceptor)
+                .addInterceptor(authInterceptor)
                 .addInterceptor(loggingInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()

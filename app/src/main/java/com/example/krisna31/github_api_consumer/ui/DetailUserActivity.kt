@@ -2,12 +2,15 @@ package com.example.krisna31.github_api_consumer.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.krisna31.github_api_consumer.R
+import com.example.krisna31.github_api_consumer.data.database.FavoriteUser
+import com.example.krisna31.github_api_consumer.data.helper.ViewModelFactory
 import com.example.krisna31.github_api_consumer.data.response.DetailUserResponse
 import com.example.krisna31.github_api_consumer.databinding.ActivityDetailUserBinding
 import com.google.android.material.tabs.TabLayout
@@ -15,7 +18,11 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailUserBinding
+    private lateinit var detailViewModel: DetailViewModel
+
+    private var _activityDetailUserBinding: ActivityDetailUserBinding? = null
+    private val binding get() = _activityDetailUserBinding
+    private var favUser: FavoriteUser? = null
 
     companion object {
         const val EXTRA_USERNAME = "EXTRA_USERNAME"
@@ -27,23 +34,59 @@ class DetailUserActivity : AppCompatActivity() {
         )
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _activityDetailUserBinding = null
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): DetailViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory).get(DetailViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailUserBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+        _activityDetailUserBinding = ActivityDetailUserBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
 
         supportActionBar?.hide()
 
-        val detailViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        )[DetailViewModel::class.java]
+        detailViewModel = obtainViewModel(this@DetailUserActivity)
 
         val username = intent.getStringExtra(EXTRA_USERNAME)
         if (username != null) {
             detailViewModel.searchOneUser(username)
             detailViewModel.detailUser.observe(this) { detailUser ->
                 setUserData(detailUser)
+                detailViewModel.getFavoriteUserByUsername(username)
+                detailViewModel.isFavorite.observe(this) { isFavorite ->
+                    favUser = FavoriteUser(
+                        username,
+                        detailUser.avatarUrl,
+                    )
+                    if (isFavorite) {
+                        binding?.fabFavorite?.setImageResource(R.drawable.ic_full_favorite)
+                        binding?.fabFavorite?.setOnClickListener {
+                            detailViewModel.deleteFavoriteUser(favUser as FavoriteUser)
+                            Toast.makeText(
+                                this@DetailUserActivity,
+                                "User has been deleted from favorite",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else {
+                        binding?.fabFavorite?.setImageResource(R.drawable.ic_favorite_border)
+                        binding?.fabFavorite?.setOnClickListener {
+                            detailViewModel.insertFavoriteUser(favUser as FavoriteUser)
+                            Toast.makeText(
+                                this@DetailUserActivity,
+                                "User has been added to favorite",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
             }
             detailViewModel.isLoading.observe(this) { isLoading ->
                 showLoading(isLoading)
@@ -63,18 +106,20 @@ class DetailUserActivity : AppCompatActivity() {
     }
 
     private fun setUserData(detailUser: DetailUserResponse) {
-        Glide
-            .with(this)
-            .load(detailUser.avatarUrl)
-            .into(binding.civUser)
-        binding.tvUsername.text = detailUser.login
-        binding.tvName.text = detailUser.name
-        binding.tvLocation.text = detailUser.location
-        binding.tvFollowing.text = "${detailUser.following} Following"
-        binding.tvFollowers.text = "${detailUser.followers} Followers"
+        binding?.let {
+            Glide
+                .with(this@DetailUserActivity)
+                .load(detailUser.avatarUrl)
+                .into(it.civUser)
+            it.tvUsername.text = detailUser.login
+            it.tvName.text = detailUser.name
+            it.tvLocation.text = detailUser.location
+            it.tvFollowing.text = "${detailUser.following} Following"
+            it.tvFollowers.text = "${detailUser.followers} Followers"
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding?.progressBar?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
