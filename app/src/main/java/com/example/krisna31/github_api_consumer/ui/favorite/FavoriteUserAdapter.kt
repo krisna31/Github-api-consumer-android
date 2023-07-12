@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.krisna31.github_api_consumer.data.database.FavoriteUser
 import com.example.krisna31.github_api_consumer.databinding.ItemUserBinding
-import com.example.krisna31.github_api_consumer.ui.DetailUserActivity
+import com.example.krisna31.github_api_consumer.ui.detail_user.DetailUserActivity
 
 class FavoriteUserAdapter :
     ListAdapter<FavoriteUser, FavoriteUserAdapter.MyViewHolder>(DIFF_CALLBACK) {

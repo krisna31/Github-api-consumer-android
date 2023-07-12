@@ -1,16 +1,23 @@
-package com.example.krisna31.github_api_consumer.ui
+package com.example.krisna31.github_api_consumer.ui.main
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.krisna31.github_api_consumer.data.DataStore.SettingPreferences
+import com.example.krisna31.github_api_consumer.data.DataStore.dataStore
+import com.example.krisna31.github_api_consumer.data.helper.ViewModelFactory
 import com.example.krisna31.github_api_consumer.data.response.SearchUserItem
 import com.example.krisna31.github_api_consumer.databinding.ActivityMainBinding
+import com.example.krisna31.github_api_consumer.ui.adapter.UserAdapter
 import com.example.krisna31.github_api_consumer.ui.favorite.FavoriteUserActivity
+import com.example.krisna31.github_api_consumer.ui.settings.SettingsActivity
+import com.example.krisna31.github_api_consumer.ui.settings.SettingsVievModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +27,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val pref = SettingPreferences.getInstance(application.dataStore)
+        val settingsViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(null, pref)
+        )[SettingsVievModel::class.java]
+        settingsViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
@@ -71,6 +91,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.civFavorite.setOnClickListener {
             startActivity(Intent(this, FavoriteUserActivity::class.java))
+        }
+
+        binding.civSetting.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -23,8 +23,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
-                android:contentDescription="Search nama github"
-                android:hint="@string/searchbar_hint" />
+                android:contentDescription="@string/search_nama_github"
+                android:hint="@string/searchbar_hint"
+                tools:ignore="ContentDescription" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civFavorite"
@@ -33,6 +34,14 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_full_favorite" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civSetting"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_settings" />
 
         </LinearLayout>
 
@@ -43,7 +52,7 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="@string/searchbar_hint"></com.google.android.material.search.SearchView>
+        android:hint="@string/searchbar_hint" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUser"

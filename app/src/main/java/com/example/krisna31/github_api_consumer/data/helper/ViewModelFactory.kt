@@ -3,10 +3,15 @@ package com.example.krisna31.github_api_consumer.data.helper
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.krisna31.github_api_consumer.ui.DetailViewModel
+import com.example.krisna31.github_api_consumer.data.DataStore.SettingPreferences
+import com.example.krisna31.github_api_consumer.ui.detail_user.DetailViewModel
 import com.example.krisna31.github_api_consumer.ui.favorite.FavoriteUserVievModel
+import com.example.krisna31.github_api_consumer.ui.settings.SettingsVievModel
 
-class ViewModelFactory private constructor(private val mApplication: Application) :
+class ViewModelFactory constructor(
+    private val mApplication: Application? = null,
+    private val pref: SettingPreferences? = null
+) :
     ViewModelProvider.NewInstanceFactory() {
     companion object {
         @Volatile
@@ -26,9 +31,11 @@ class ViewModelFactory private constructor(private val mApplication: Application
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-            return DetailViewModel(mApplication) as T
+            return DetailViewModel(mApplication!!) as T
         } else if (modelClass.isAssignableFrom(FavoriteUserVievModel::class.java)) {
-            return FavoriteUserVievModel(mApplication) as T
+            return FavoriteUserVievModel(mApplication!!) as T
+        } else if (modelClass.isAssignableFrom(SettingsVievModel::class.java)) {
+            return SettingsVievModel(pref!!) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }

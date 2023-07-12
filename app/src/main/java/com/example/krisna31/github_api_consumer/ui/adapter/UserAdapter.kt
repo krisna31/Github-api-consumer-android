@@ -1,4 +1,4 @@
-package com.example.krisna31.github_api_consumer.ui
+package com.example.krisna31.github_api_consumer.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.krisna31.github_api_consumer.data.response.SearchUserItem
 import com.example.krisna31.github_api_consumer.databinding.ItemUserBinding
+import com.example.krisna31.github_api_consumer.ui.detail_user.DetailUserActivity
 
 class UserAdapter : ListAdapter<SearchUserItem, UserAdapter.MyViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

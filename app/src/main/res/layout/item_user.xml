@@ -18,9 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:layout_toRightOf="@+id/civUser"
-        android:text="Krisna31"
-        android:textColor="@color/black"
+        android:layout_toEndOf="@+id/civUser"
+        android:text="@string/krisna31"
+        android:textColor="?attr/colorPrimaryVariant"
         android:textSize="16sp"
         android:textStyle="bold" />
 

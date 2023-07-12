@@ -1,4 +1,4 @@
-package com.example.krisna31.github_api_consumer.ui
+package com.example.krisna31.github_api_consumer.ui.follow
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -10,4 +10,8 @@
     <string name="favorite_user">Favorite User</string>
     <string name="overflow_menu">Overflow Menu</string>
     <string name="button_to_go_to_favorite_user">Button to go to favorite user</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="search_nama_github">Search nama github</string>
+    <string name="love_button">love button</string>
+    <string name="tab_follower_and_following">tab follower and following</string>
 </resources>

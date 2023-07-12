@@ -1,9 +1,10 @@
-package com.example.krisna31.github_api_consumer.ui
+package com.example.krisna31.github_api_consumer.ui.detail_user
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.krisna31.github_api_consumer.ui.follow.FollowFragment
 
 class SectionsFollowPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {

@@ -1,4 +1,4 @@
-package com.example.krisna31.github_api_consumer.ui
+package com.example.krisna31.github_api_consumer.ui.follow
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -35,7 +35,7 @@ class FollowFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentFollowBinding.inflate(inflater, container, false)
         val view = binding.root

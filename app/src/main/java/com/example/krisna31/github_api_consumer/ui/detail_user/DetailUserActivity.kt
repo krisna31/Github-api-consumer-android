@@ -1,4 +1,4 @@
-package com.example.krisna31.github_api_consumer.ui
+package com.example.krisna31.github_api_consumer.ui.detail_user
 
 import android.os.Bundle
 import android.view.View
@@ -41,7 +41,7 @@ class DetailUserActivity : AppCompatActivity() {
 
     private fun obtainViewModel(activity: AppCompatActivity): DetailViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory).get(DetailViewModel::class.java)
+        return ViewModelProvider(activity, factory)[DetailViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
