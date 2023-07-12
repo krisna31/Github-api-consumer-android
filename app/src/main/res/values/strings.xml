@@ -2,14 +2,9 @@
     <string name="app_name">Mini Github</string>
     <string name="searchbar_hint">Masukkan nama user github</string>
     <string name="krisna31">Krisna31</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="content_tab_followers">Followers</string>
-    <string name="content_tab_following">Following</string>
     <string name="tab_text_1">Followers</string>
     <string name="tab_text_2">Following</string>
     <string name="favorite_user">Favorite User</string>
-    <string name="overflow_menu">Overflow Menu</string>
-    <string name="button_to_go_to_favorite_user">Button to go to favorite user</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="search_nama_github">Search nama github</string>
     <string name="love_button">love button</string>

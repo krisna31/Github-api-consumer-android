@@ -3,7 +3,7 @@ package com.example.krisna31.github_api_consumer.data.helper
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.krisna31.github_api_consumer.data.DataStore.SettingPreferences
+import com.example.krisna31.github_api_consumer.data.datastore.SettingPreferences
 import com.example.krisna31.github_api_consumer.ui.detail_user.DetailViewModel
 import com.example.krisna31.github_api_consumer.ui.favorite.FavoriteUserVievModel
 import com.example.krisna31.github_api_consumer.ui.settings.SettingsVievModel

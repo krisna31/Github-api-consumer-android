@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.krisna31.github_api_consumer.data.DataStore.SettingPreferences
-import com.example.krisna31.github_api_consumer.data.DataStore.dataStore
+import com.example.krisna31.github_api_consumer.data.datastore.SettingPreferences
+import com.example.krisna31.github_api_consumer.data.datastore.dataStore
 import com.example.krisna31.github_api_consumer.data.helper.ViewModelFactory
 import com.example.krisna31.github_api_consumer.data.response.SearchUserItem
 import com.example.krisna31.github_api_consumer.databinding.ActivityMainBinding

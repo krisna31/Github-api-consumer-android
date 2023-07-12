@@ -1,5 +1,6 @@
 package com.example.krisna31.github_api_consumer.ui.detail_user
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ class SectionsFollowPagerAdapter(activity: AppCompatActivity) : FragmentStateAda
         return fragment
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setUsername(username: String): Unit {
         this.username = username
         notifyDataSetChanged()

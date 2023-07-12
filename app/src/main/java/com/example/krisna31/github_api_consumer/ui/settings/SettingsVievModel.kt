@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.krisna31.github_api_consumer.data.DataStore.SettingPreferences
+import com.example.krisna31.github_api_consumer.data.datastore.SettingPreferences
 import kotlinx.coroutines.launch
 
 class SettingsVievModel(private val pref: SettingPreferences) : ViewModel() {

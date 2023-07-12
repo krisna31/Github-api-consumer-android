@@ -5,8 +5,8 @@ import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
-import com.example.krisna31.github_api_consumer.data.DataStore.SettingPreferences
-import com.example.krisna31.github_api_consumer.data.DataStore.dataStore
+import com.example.krisna31.github_api_consumer.data.datastore.SettingPreferences
+import com.example.krisna31.github_api_consumer.data.datastore.dataStore
 import com.example.krisna31.github_api_consumer.data.helper.ViewModelFactory
 import com.example.krisna31.github_api_consumer.databinding.ActivitySettingsBinding
 

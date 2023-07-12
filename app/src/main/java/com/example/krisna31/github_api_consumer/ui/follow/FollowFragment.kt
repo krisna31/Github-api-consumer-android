@@ -1,3 +1,5 @@
+@file:Suppress("KDocUnresolvedReference")
+
 package com.example.krisna31.github_api_consumer.ui.follow
 
 import android.os.Bundle
@@ -15,6 +17,7 @@ import com.example.krisna31.github_api_consumer.databinding.FragmentFollowBindin
  * Use the [FollowFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@Suppress("KDocUnresolvedReference")
 class FollowFragment : Fragment() {
     private var param1: Int? = null
     private var param2: String? = null

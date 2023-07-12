@@ -13,6 +13,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("UNNECESSARY_NOT_NULL_ASSERTION")
 class DetailViewModel(application: Application) : ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
@@ -45,10 +46,6 @@ class DetailViewModel(application: Application) : ViewModel() {
         private const val TAG = "DetailViewModel"
     }
 
-    init {
-
-    }
-
     fun searchOneUser(username: String = "krisna31") {
         _isLoading.value = true
         val client = ApiConfig.getApiService().getDetailUser(username)
@@ -61,7 +58,7 @@ class DetailViewModel(application: Application) : ViewModel() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null) {
-                        _detailUser.value = responseBody
+                        _detailUser.value = responseBody!!
                     }
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")

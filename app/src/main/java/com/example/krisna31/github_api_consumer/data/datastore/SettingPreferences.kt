@@ -1,4 +1,4 @@
-package com.example.krisna31.github_api_consumer.data.DataStore
+package com.example.krisna31.github_api_consumer.data.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -13,17 +13,15 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "se
 
 class SettingPreferences private constructor(private val dataStore: DataStore<Preferences>) {
 
-    private val THEME_KEY = booleanPreferencesKey("theme_setting")
-
     fun getThemeSetting(): Flow<Boolean> {
         return dataStore.data.map { preferences ->
-            preferences[THEME_KEY] ?: false
+            preferences[Companion.THEME_KEY] ?: false
         }
     }
 
     suspend fun saveThemeSetting(isDarkModeActive: Boolean) {
         dataStore.edit { preferences ->
-            preferences[THEME_KEY] = isDarkModeActive
+            preferences[Companion.THEME_KEY] = isDarkModeActive
         }
     }
 
@@ -38,5 +36,7 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
                 instance
             }
         }
+
+        private val THEME_KEY = booleanPreferencesKey("theme_setting")
     }
 }
